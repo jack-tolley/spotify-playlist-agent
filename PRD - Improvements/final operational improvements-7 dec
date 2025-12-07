@@ -1,0 +1,189 @@
+you are working on the spotify playlist agent as an improvement collaborator.
+  read the gemini file for instructions. implement the following imrpvoements.
+  when done, revise the gemini file to document the role of the improvement
+  collaborator and describe it for future sessions.
+
+
+   Final Implementation Improvement Plan
+
+  The agent has made excellent progress on the creative/emotional intelligence layer. Now we need to merge this with the foundational infrastructure changes to create a cohesive,
+  production-ready agent.
+
+  ---
+  Current State Assessment
+
+  | Layer                   | Status        | Notes                                      |
+  |-------------------------|---------------|--------------------------------------------|
+  | Emotional Intelligence  | ✅ Implemented | Intensity parsing, compound emotions, arcs |
+  | Prompt Enrichment       | ✅ Implemented | Negation, comparisons, temporal modifiers  |
+  | Creative Variability    | ✅ Implemented | Discovery slots, tier shuffling            |
+  | Playlist Sequencing     | ✅ Implemented | Energy curves, artist spacing              |
+  | Artist ID-based Search  | ❌ Not done    | Still using string matching                |
+  | Config File System      | ❌ Not done    | Hardcoded values remain                    |
+  | Async Parallel Requests | ❌ Not done    | Sequential API calls                       |
+
+  Updated Overall Rating: 7.8/10 → Could reach 8.5-9/10 with infrastructure layer.
+
+  ---
+  Final Implementation Priorities
+
+  Phase 1: Infrastructure Foundation (Complete First)
+
+  These changes underpin everything else and make the new intelligence features more reliable:
+
+  1. Config File System
+  # config.yaml
+  defaults:
+    tracks_per_artist: 5
+    creativity: 0.4
+    arc_type: 'journey'
+    playlist_public: false
+
+  emotional_mappings:
+    # Override or extend default emotion→audio mappings
+    'bittersweet':
+      valence_range: [0.3, 0.5]
+      energy_range: [0.4, 0.6]
+
+  artist_mappings:
+    "Shapeshifter":
+      spotify_id: "3MZp9xnOaV..."
+      region: "NZ"
+      exclude_ids: ["2abc..."]
+
+  Why now: The new intelligence methods have parameters (creativity, arc_type) that users will want to customize. A config system prevents hardcoding these defaults across multiple methods.
+
+  2. Artist ID-based Search
+
+  def find_artist_id(self, name):
+      # Check config cache first
+      if name in self.config.artist_mappings:
+          return self.config.artist_mappings[name]['spotify_id']
+
+      # Search Spotify artist endpoint directly
+      result = self._api_request('GET', '/search',
+                                 params={'q': f'artist:"{name}"', 'type': 'artist', 'limit': 1})
+      artists = result.get('artists', {}).get('items', [])
+
+      if artists:
+          artist_id = artists[0]['id']
+          # Auto-cache for future use
+          self._cache_artist_mapping(name, artist_id)
+          return artist_id
+      return None
+
+  def get_artist_top_tracks(self, artist_id, market='US'):
+      return self._api_request('GET', f'/artists/{artist_id}/top-tracks',
+                               params={'market': market})
+
+  Why now: The verify/exclude pattern in example_synthony_playlist.py is a workaround. With proper Artist ID search:
+  - No more wrong-artist bugs
+  - Simpler lineup definitions
+  - get_artist_top_tracks endpoint gives better results than search
+
+  ---
+  Phase 2: Integration Layer
+
+  Connect the new intelligence methods with the infrastructure:
+
+  3. Unified Pipeline Method
+
+  The agent added curate_tracks_intelligent() but it should become the default path:
+
+  def create_playlist_from_prompt(self, prompt, track_count=25, 
+                                   creativity=None, arc_type=None, public=False):
+      # Load defaults from config
+      creativity = creativity or self.config.defaults.creativity
+      arc_type = arc_type or self.config.defaults.arc_type
+
+      # Use new intelligence pipeline
+      analysis = self.analyze_emotional_depth(prompt)
+      enriched = self.enrich_prompt(prompt)
+
+      # ... search and curate ...
+
+      curated = self.curate_tracks_intelligent(tracks, prompt, creativity)
+      sequenced = self.sequence_playlist(curated, features, arc_type)
+
+      # ... create playlist ...
+
+  4. Update Example Script
+
+  example_synthony_playlist.py should use the new patterns:
+
+  LINEUP = [
+      {"name": "Faithless", "spotify_id": "3MZp..."},  # Direct ID
+      {"name": "Shapeshifter", "spotify_id": "4Abc...", "region": "NZ"},
+      # Fallback for unknown artists
+      {"name": "Local DJ", "search_fallback": True},
+  ]
+
+  # Use config-driven defaults
+  agent = SpotifyPlaylistAgent(config_path='synthony_config.yaml')
+
+  ---
+  Phase 3: Performance (After Core is Solid)
+
+  5. Async Parallel Requests
+
+  Only tackle this after the above is working:
+
+  import asyncio
+  import aiohttp
+
+  async def search_multiple_artists(self, artist_ids):
+      async with aiohttp.ClientSession() as session:
+          tasks = [self._async_get_top_tracks(session, aid) for aid in artist_ids]
+          return await asyncio.gather(*tasks)
+
+  Note: This requires refactoring _api_request to support async. Consider whether the speedup justifies the complexity for typical use cases (7 artists × 1 request each = ~3 seconds
+  currently).
+
+  ---
+  Updated Ratings Projection
+
+  | Criterion              | Current | After Infrastructure | Final  |
+  |------------------------|---------|----------------------|--------|
+  | Emotional Intelligence | 7/10    | 7/10                 | 7/10   |
+  | Adaptability           | 7/10    | 8/10                 | 8.5/10 |
+  | Creative Output        | 8/10    | 8/10                 | 8/10   |
+  | Reliability            | 6/10    | 8/10                 | 8.5/10 |
+  | Maintainability        | 5/10    | 8/10                 | 8/10   |
+  | Overall                | 7.8/10  | 8.3/10               | 8.5/10 |
+
+  ---
+  Implementation Checklist
+
+  [ ] Phase 1: Infrastructure
+      [ ] Create config.yaml schema and loader
+      [ ] Add ConfigManager class to spotify_agent.py
+      [ ] Implement find_artist_id() with config lookup + API fallback
+      [ ] Implement get_artist_top_tracks()
+      [ ] Add artist ID caching (write back to config)
+
+  [ ] Phase 2: Integration
+      [ ] Update create_playlist_from_prompt() to use intelligence pipeline
+      [ ] Make creativity/arc_type configurable with defaults
+      [ ] Refactor example_synthony_playlist.py to use Artist IDs
+      [ ] Update spotify-agent-creator-guide.md with new patterns
+
+  [ ] Phase 3: Performance (Optional)
+      [ ] Evaluate if async is needed for typical use cases
+      [ ] If yes: refactor _api_request for async support
+      [ ] Add connection pooling
+
+  ---
+  What NOT to Do
+
+  - Don't add LLM integration for prompt parsing - The rule-based enrichment is working. LLM adds latency, cost, and a dependency. Revisit only if users hit parsing limitations.
+  - Don't build web scraping - Out of scope. Keep the agent focused.
+  - Don't add playlist versioning - Complexity for rare use case.
+  - Don't encrypt tokens - Overkill for local CLI.
+
+  ---
+  Final Recommendation
+
+  Ship Config + Artist ID search as the next PR. This is ~3-4 hours of work and transforms reliability. The intelligence layer is already strong—now make it bulletproof with proper
+  infrastructure underneath.
+
+  The agent has done good work on the creative side. The gap is now operational, not creative.

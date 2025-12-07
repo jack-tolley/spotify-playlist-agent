@@ -1,0 +1,81 @@
+# Spotify Playlist Agent Configuration
+# This file contains customizable defaults and mappings for the agent.
+
+defaults:
+  tracks_per_artist: 5
+  target_track_count: 25
+  creativity: 0.4
+  arc_type: 'journey'
+  playlist_public: false
+  max_tracks_per_artist: 3
+  market: 'US'
+
+# Emotional mappings - override or extend default emotion->audio feature mappings
+# Each emotion maps to target valence and energy ranges
+emotional_mappings:
+  bittersweet:
+    valence_range: [0.3, 0.5]
+    energy_range: [0.4, 0.6]
+  nostalgic:
+    valence_range: [0.3, 0.5]
+    energy_range: [0.2, 0.4]
+  triumphant:
+    valence_range: [0.7, 1.0]
+    energy_range: [0.8, 1.0]
+  melancholic:
+    valence_range: [0.1, 0.3]
+    energy_range: [0.2, 0.4]
+  euphoric:
+    valence_range: [0.8, 1.0]
+    energy_range: [0.7, 0.9]
+  contemplative:
+    valence_range: [0.4, 0.6]
+    energy_range: [0.2, 0.4]
+
+# Artist mappings - cache Spotify IDs to avoid wrong-artist bugs
+# Format: artist_name -> spotify_id, region, exclude_ids (optional)
+artist_mappings:
+  # Example: NZ Shapeshifter vs UK Shapeshifters
+  "Shapeshifter":
+    spotify_id: "3MZsBdqDrRTJihTHQrO6Dq"
+    region: "NZ"
+    exclude_ids: []
+  "Faithless":
+    spotify_id: "6DlCEuo1y7sNmXpRi2PJQX"
+    region: "UK"
+  "Peking Duk":
+    spotify_id: "4RbcGEz2sLt8v0sAGFMrYm"
+    region: "AU"
+  "The Black Seeds":
+    spotify_id: "1w5qrIV3Yh0BBBb2FzjCEn"
+    region: "NZ"
+  "The Exponents":
+    spotify_id: "0WvPgQMRrqUWOGWGT5Lxut"
+    region: "NZ"
+  "Kaylee Bell":
+    spotify_id: "2ooK3RLZMI7PJtNjqHlzJT"
+    region: "NZ"
+
+# Context to search query mappings
+context_search_terms:
+  workout: 'workout energy high bpm'
+  study: 'focus instrumental concentration'
+  sleep: 'sleep ambient calm'
+  party: 'party dance hits upbeat'
+  road_trip: 'road trip classics driving'
+  dinner: 'dinner jazz smooth'
+  coffee_shop: 'acoustic chill indie'
+  morning: 'morning feel good positive'
+
+# Arc type configurations for playlist sequencing
+arc_types:
+  balanced:
+    description: "Consistent energy throughout - good for background listening"
+  build:
+    description: "Start low, build to high energy - workout warmup"
+  journey:
+    description: "Mid -> Peak -> Wind down - album-like experience"
+  energize:
+    description: "Start strong, maintain high energy - party/workout"
+  wind_down:
+    description: "Start high, gradually decrease - evening relaxation"

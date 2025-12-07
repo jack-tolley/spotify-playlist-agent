@@ -1,0 +1,42 @@
+# Environment variables (contains Spotify credentials)
+.env
+
+# OAuth tokens
+spotify_tokens.json
+
+# SSL certificates
+cert.pem
+key.pem
+
+# Generated playlist covers (may be personal)
+playlist_cover.jpg
+*.jpg
+*.png
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude settings (local only)
+.claude/
