@@ -490,6 +490,23 @@ class SpotifyPlaylistAgent:
         if use_top_tracks:
             # Get top tracks (more reliable, pre-sorted by popularity)
             tracks = self.get_artist_top_tracks(artist_id)
+
+            # If no tracks returned (e.g., invalid cached ID), try search fallback
+            if not tracks:
+                print(f"  No top tracks found for cached ID, trying search...")
+                tracks = self.search_tracks(f'artist:"{artist_name}"', limit=50)
+                # Filter to current artist and sort by popularity
+                if tracks:
+                    filtered = []
+                    for t in tracks:
+                        # Accept tracks where artist name matches (case-insensitive)
+                        for a in t.get('artists', []):
+                            if a['name'].lower() == artist_name.lower():
+                                filtered.append(t)
+                                break
+                    filtered.sort(key=lambda t: t.get('popularity', 0), reverse=True)
+                    tracks = filtered
+
             return tracks[:track_count]
         else:
             # Fallback: search for tracks by artist

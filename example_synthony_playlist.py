@@ -39,6 +39,20 @@ def update_synthony_playlist(tracks_per_artist=5):
     Args:
         tracks_per_artist: Number of tracks to include per artist
     """
+    # Validate playlist ID is set
+    if PLAYLIST_ID == "YOUR_PLAYLIST_ID_HERE":
+        print("\n" + "="*60)
+        print("  ERROR: Playlist ID not configured")
+        print("="*60)
+        print("\nPlease update the PLAYLIST_ID variable with your actual playlist ID.")
+        print("\nTo get a playlist ID:")
+        print("  1. Open Spotify and navigate to your playlist")
+        print("  2. Click '...' -> Share -> Copy link to playlist")
+        print("  3. Extract the ID from the URL:")
+        print("     https://open.spotify.com/playlist/YOUR_ID_HERE")
+        print("\nOr use create_lineup_playlist() to create a new playlist.")
+        return None
+
     # Initialize agent (loads config automatically)
     agent = SpotifyPlaylistAgent()
 
@@ -206,4 +220,34 @@ def create_lineup_playlist(lineup, playlist_name, description=None,
 
 
 if __name__ == '__main__':
-    update_synthony_playlist()
+    import sys
+
+    print("\n" + "="*60)
+    print("  Spotify Festival Playlist Example")
+    print("="*60)
+    print("\nThis script demonstrates creating festival lineup playlists.")
+    print("\nUsage options:")
+    print("  1. Update existing playlist (requires PLAYLIST_ID configuration)")
+    print("  2. Create new playlist using create_lineup_playlist()")
+    print("\n" + "="*60 + "\n")
+
+    if PLAYLIST_ID == "YOUR_PLAYLIST_ID_HERE":
+        print("Creating a NEW playlist (no PLAYLIST_ID configured)...\n")
+
+        # Example: Create new playlist
+        url = create_lineup_playlist(
+            lineup=LINEUP,
+            playlist_name="Synthony 2026 Festival Mix",
+            description="Festival lineup featuring " + ", ".join(LINEUP[:3]) + " and more",
+            tracks_per_artist=5,
+            playlist_id=None  # None = create new
+        )
+
+        if url:
+            print(f"\n✓ Success! New playlist created: {url}")
+            print("\nTo update this playlist in the future:")
+            print(f"  1. Extract the playlist ID from the URL")
+            print(f"  2. Set PLAYLIST_ID = '<your_id>' at the top of this file")
+    else:
+        print("Updating EXISTING playlist...\n")
+        update_synthony_playlist()

@@ -34,27 +34,12 @@ emotional_mappings:
 
 # Artist mappings - cache Spotify IDs to avoid wrong-artist bugs
 # Format: artist_name -> spotify_id, region, exclude_ids (optional)
+# IDs are auto-discovered and cached on first run
 artist_mappings:
-  # Example: NZ Shapeshifter vs UK Shapeshifters
-  "Shapeshifter":
-    spotify_id: "3MZsBdqDrRTJihTHQrO6Dq"
-    region: "NZ"
-    exclude_ids: []
-  "Faithless":
-    spotify_id: "6DlCEuo1y7sNmXpRi2PJQX"
-    region: "UK"
-  "Peking Duk":
-    spotify_id: "4RbcGEz2sLt8v0sAGFMrYm"
-    region: "AU"
-  "The Black Seeds":
-    spotify_id: "1w5qrIV3Yh0BBBb2FzjCEn"
-    region: "NZ"
-  "The Exponents":
-    spotify_id: "0WvPgQMRrqUWOGWGT5Lxut"
-    region: "NZ"
-  "Kaylee Bell":
-    spotify_id: "2ooK3RLZMI7PJtNjqHlzJT"
-    region: "NZ"
+  # Example:
+  # "Artist Name":
+  #   spotify_id: "discovered_id_here"
+  #   region: "US"
 
 # Context to search query mappings
 context_search_terms:

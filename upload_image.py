@@ -29,6 +29,15 @@ def upload_playlist_image(image_path, playlist_id=None):
     if not playlist_id:
         playlist_id = DEFAULT_PLAYLIST_ID
 
+    # Validate playlist ID is set
+    if playlist_id == "YOUR_PLAYLIST_ID_HERE":
+        print("\nError: Playlist ID not configured")
+        print("\nPlease provide a playlist ID:")
+        print("  python upload_image.py <image_path> <playlist_id>")
+        print("\nExample:")
+        print("  python upload_image.py cover.jpg 2lCjcqHl8RPjtI9NEY0pyb")
+        return False
+
     # Validate image file
     if not os.path.exists(image_path):
         print(f"Error: Image file not found: {image_path}")
