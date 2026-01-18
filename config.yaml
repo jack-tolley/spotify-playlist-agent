@@ -1,66 +1,294 @@
-# Spotify Playlist Agent Configuration
-# This file contains customizable defaults and mappings for the agent.
-
 defaults:
   tracks_per_artist: 5
   target_track_count: 25
   creativity: 0.4
-  arc_type: 'journey'
+  arc_type: journey
   playlist_public: false
   max_tracks_per_artist: 3
-  market: 'US'
-
-# Emotional mappings - override or extend default emotion->audio feature mappings
-# Each emotion maps to target valence and energy ranges
+  market: US
 emotional_mappings:
   bittersweet:
-    valence_range: [0.3, 0.5]
-    energy_range: [0.4, 0.6]
+    valence_range:
+    - 0.3
+    - 0.5
+    energy_range:
+    - 0.4
+    - 0.6
   nostalgic:
-    valence_range: [0.3, 0.5]
-    energy_range: [0.2, 0.4]
+    valence_range:
+    - 0.3
+    - 0.5
+    energy_range:
+    - 0.2
+    - 0.4
   triumphant:
-    valence_range: [0.7, 1.0]
-    energy_range: [0.8, 1.0]
+    valence_range:
+    - 0.7
+    - 1.0
+    energy_range:
+    - 0.8
+    - 1.0
   melancholic:
-    valence_range: [0.1, 0.3]
-    energy_range: [0.2, 0.4]
+    valence_range:
+    - 0.1
+    - 0.3
+    energy_range:
+    - 0.2
+    - 0.4
   euphoric:
-    valence_range: [0.8, 1.0]
-    energy_range: [0.7, 0.9]
+    valence_range:
+    - 0.8
+    - 1.0
+    energy_range:
+    - 0.7
+    - 0.9
   contemplative:
-    valence_range: [0.4, 0.6]
-    energy_range: [0.2, 0.4]
-
-# Artist mappings - cache Spotify IDs to avoid wrong-artist bugs
-# Format: artist_name -> spotify_id, region, exclude_ids (optional)
-# IDs are auto-discovered and cached on first run
+    valence_range:
+    - 0.4
+    - 0.6
+    energy_range:
+    - 0.2
+    - 0.4
 artist_mappings:
-  # Example:
-  # "Artist Name":
-  #   spotify_id: "discovered_id_here"
-  #   region: "US"
-
-# Context to search query mappings
+  Kid Cudi:
+    spotify_id: 0fA0VVWsXO9YnASrzqfmYu
+  Turnstile:
+    spotify_id: 2qnpHrOzdmOo1S4ox3j17x
+  Wilkinson:
+    spotify_id: 6m8itYST9ADjBIYevXSb1r
+  L.A.B:
+    spotify_id: 1VwMKPdHxC7tI21tynmXEr
+  070 Shake:
+    spotify_id: 12Zk1DFhCbHY6v3xep2ZjI
+  Maribou State:
+    spotify_id: 7zrkALJ9ayRjzysp4QYoEg
+  Marc Rebillet:
+    spotify_id: 72udTJKu1pGovvS9aCYGMI
+  Dope Lemon:
+    spotify_id: 7oZLKL1GjYiaAgssXsLmW8
+  Pendulum:
+    spotify_id: 7MqnCTCAX6SsIYYdJCQj9B
+  Peking Duk:
+    spotify_id: 0UZ1nu3kcdNlCoiKRjmSSY
+  Shy FX:
+    spotify_id: 5oDtp2FC8VqBjTx1aT4P5j
+  Lee Mvtthews:
+    spotify_id: 2rf0ufpy1NIUGmEHqq27GC
+  Montell2099:
+    spotify_id: 47MGg5VHBSS5yHRuMGt6b0
+  A-Trak:
+    spotify_id: 3TaUSUXn41GixL7zbvrIDt
+  Sam Gellaitry:
+    spotify_id: 07UJz804RJxqNvxFXC3h9H
+  Cyril:
+    spotify_id: 11kt6ggsdxvI8MhyeSMKom
+  Kanine:
+    spotify_id: 1KiNUGL3r0GgyLwqYCY1yV
+  Notion:
+    spotify_id: 1uRVM0wBdtyEuU582EeKJM
+  Corrella:
+    spotify_id: 3zo9C8J8m3VlXb9hNlLcJX
+  Home Brew:
+    spotify_id: 6pAk8OZVCX1nMiYgtAauSH
+  Skepsis:
+    spotify_id: 6DnQYUjtYusK9QJts9HqSC
+  Jane Remover:
+    spotify_id: 2rLGlNI6htigNxx172qxLu
+  Good Neighbours:
+    spotify_id: 52N3KGrTWDRhdQJrgBTofE
+  Bl3ss:
+    spotify_id: 6kbR2eL4hecj3rFwGOsYsI
+  Charlotte Plank:
+    spotify_id: 4U5QErgn94wZGw1rJz01BO
+  Inji:
+    spotify_id: 0Z4Ir8usNVcAdCSQl0fQki
+  Mozey:
+    spotify_id: 1h8wkWuZQKyDiwbLogtoL0
+  Hori Shaw:
+    spotify_id: 3weDT5G04NSpPg2q1lvcJh
+  Te Wehi:
+    spotify_id: 2DkCh3TikVqqOAKrbMNIVc
+  Messie:
+    spotify_id: 4VsVLz3Uw6d0fdM6gFtLfo
+  Atarangi:
+    spotify_id: 6YELcHxDHTT6rskJtuyEA0
+  Coast Arcade:
+    spotify_id: 1QfAgtBvfQQTNZjqSGyTEC
+  Broderbeats:
+    spotify_id: 2eXQZHqdjalPEOeNU4Dozk
+  Fcukers:
+    spotify_id: 3UtzOHYm3lQALkKzVD4wyO
+  Swimming Paul:
+    spotify_id: 5rEwPEAHq2q1yW3wF4av5s
+  Sota:
+    spotify_id: 78UYwUXnotbqcp2NTxjujP
+  Diffrent:
+    spotify_id: 7mycnkT3eOskxxGbN9skkV
+  Emily Makis:
+    spotify_id: 51ferxocEKt0vjxzUsqyFX
+  Killowen:
+    spotify_id: 1DjYfGxpROAacO07tajyAO
+  Borderline:
+    spotify_id: 2VHeXzEg1gCfwYf3oADlUQ
+  Julian Dennison:
+    spotify_id: 1egKyzlHtCyLzLOQxooBrs
+  Linska:
+    spotify_id: 5f7jxYF5js7lD5lMyIPUBq
+  Sin:
+    spotify_id: 4sD9znwiVFx9cgRPZ42aQ1
+  Titan:
+    spotify_id: 5bshmv1cQuPIB1bpGyKAkI
+  Dani Josie:
+    spotify_id: 2ip2kplRr44eU1GSZDI0Ap
+  Dende the Sensei:
+    spotify_id: 3YkMXVpdxPkS3ODnSkBhO2
+  First Reserve:
+    spotify_id: 246TlwOtP9izhfSclihbPx
+  Lucy Gray:
+    spotify_id: 4VY8YjTBMWRbgAZfPpFjq5
+  Brigsy:
+    spotify_id: 0GPTDWah2ZOX9DRpMXsav6
+  Chris Keene:
+    spotify_id: 4swbBkqQp197bLZH2ym3ph
+  Lance Savali:
+    spotify_id: 3BJfXq3PuHFiHrD6PcfpCd
+  Le Shiv:
+    spotify_id: 5G1xjxkXFx4zouU8Mr9Ua6
+  Ned Bennett:
+    spotify_id: 3W4SFGAj6oDQn7rvpA19gi
+  Sex Mask:
+    spotify_id: 58TcB8X9Cr1VpR9PrXJeTQ
+  Will Swinton:
+    spotify_id: 1fUcXY3KcnNvCP2dnF7XCh
+  Damage Control:
+    spotify_id: 4jDyMiduWrf7ke7yIQSE4w
+  Double Parked:
+    spotify_id: 6nZ4csPPai2LDARuLYvbe4
+  Liberty:
+    spotify_id: 5p55CBp9NCYFLNC0TBQox7
+  Reasxn:
+    spotify_id: 0eWBMtUxlOFYCKDky6H5YM
+  Shehatesjacob:
+    spotify_id: 09l0yEPQo89pLUeyt0yg1k
+  The Falcons:
+    spotify_id: 7hUrFkKBD1PWTn55l22v90
+  Trei:
+    spotify_id: 0ZNle26FCkef6NjJqBRice
+  Brook Gibson:
+    spotify_id: 0MC4oE2kUgShOCraXG6H6H
+  Crossy:
+    spotify_id: 4gAWlNtMIGaE4VhzbNq7hc
+  Gray:
+    spotify_id: 7J2lZBANizgPNfUzux31PV
+  Ringlets:
+    spotify_id: 5CgTsJzu2AaHviFIlpoLwa
+  Corners:
+    spotify_id: 1S2ap9GFCRr2F8JlSzEieK
+  Ella Monnery:
+    spotify_id: 1FD0AA37DenDFODrf9zovI
+  Emerson:
+    spotify_id: 6LcSy8gx2Eb1FVRd1NoONZ
+  Hutch:
+    spotify_id: 39x8gyJjTHiBQklFgVJSV4
+  Inmotion:
+    spotify_id: 4hscAazNsep848i472yL0L
+  Juni:
+    spotify_id: 6o2VsYOl5FxnOJYvod1Q8p
+  Licious:
+    spotify_id: 1XVVcr3UeO5i9IAjJffyKr
+  Mikeyy:
+    spotify_id: 55ILpEsjJWvHpPIlUQIJJW
+  Mylen:
+    spotify_id: 7yHbz9ub8NawhPnbZbQQfW
+  Ali-B:
+    spotify_id: 6CsleyOZtyt16saX8WhzDx
+  Dons:
+    spotify_id: 3DjJiiOy3bJ9JFn81mxbWS
+  Ex-Freq:
+    spotify_id: 6sh2nyHT6KzXFchZ6pj6W8
+  Ffar:
+    spotify_id: 5zqfpsHWLp3cJ7mfUakWJC
+  Hatrick:
+    spotify_id: 5grlfW8fZQm4h59ayDUrwP
+  Hossy:
+    spotify_id: 4irCBqmFi6qqIuU5haJcUf
+  Lady Jesus:
+    spotify_id: 6VA7GZmAoHlPuEZ0Y8vNPH
+  Milan:
+    spotify_id: 3byro7ByLeWjNoWLAfiq0b
+  Onit:
+    spotify_id: 6o2VsYOl5FxnOJYvod1Q8p
+  Slaps:
+    spotify_id: 4nNxZ9weXMeokvs9ohcmZl
+  Sless:
+    spotify_id: 3S0eOpa13f24tV5Lv7yOX9
+  Zozo:
+    spotify_id: 1rWuV4mjAmolGb1PaBX2Cs
+  Esha Tewari:
+    spotify_id: 45W0uOq0sDCediEA9i8VJt
+  1tbsp:
+    spotify_id: 6G01WYFYF91rjG5LtwMhY4
+  Elliot & Vincent:
+    spotify_id: 14gO6ZZH9e1CNdMMPJhGHq
+  Faithless:
+    spotify_id: 5T4UKHhr4HGIC0VzdZQtAE
+  Basement Jaxx:
+    spotify_id: 4YrKBkKSVeqDamzBPWVnSJ
+  Fatboy Slim:
+    spotify_id: 4Y7tXHSEejGu1vQ9bwDdXW
+  Groove Armada:
+    spotify_id: 67tgMwUfnmqzYsNAtnP6YJ
+  The Chemical Brothers:
+    spotify_id: 1GhPHrq36VKCY3ucVaZCfo
+  Daft Punk:
+    spotify_id: 4tZwfgrHOc3mvqYlEYSvVi
+  Jamiroquai:
+    spotify_id: 6J7biCazzYhU3gM9j1wfid
+  Moby:
+    spotify_id: 3OsRAKCvk37zwYcnzRf5XF
+  Underworld:
+    spotify_id: 1PXHzxRDiLnjqNrRn2Xbsa
+  Zero 7:
+    spotify_id: 14H7ag1wpQOsPPQJOD6Dqr
+  "R\xF6yksopp":
+    spotify_id: 5nPOO9iTcrs9k6yFffPxjH
+  Leftfield:
+    spotify_id: 72hqBMsw7x5jnfxxwkii8L
+  Orbital:
+    spotify_id: 3csPCeXsj2wezyvkRFzvmV
+  Air:
+    spotify_id: 1P6U1dCeHxPui5pIrGmndZ
+  Propellerheads:
+    spotify_id: 3Z7thZHrtFvqp8OpPffPKp
+  The Prodigy:
+    spotify_id: 4k1ELeJKT1ISyDv8JivPpB
+  Massive Attack:
+    spotify_id: 6FXMGgJwohJLUSr5nVlf9X
+  DJ Shadow:
+    spotify_id: 5CE2IfdYZEQGIDsfiRm8SI
+  Morcheeba:
+    spotify_id: 6bWxFw65IEJzBYjx3SxUXd
+  FC Kahuna:
+    spotify_id: 1UQ5GQDdYPKgbIEn9sMiSg
 context_search_terms:
-  workout: 'workout energy high bpm'
-  study: 'focus instrumental concentration'
-  sleep: 'sleep ambient calm'
-  party: 'party dance hits upbeat'
-  road_trip: 'road trip classics driving'
-  dinner: 'dinner jazz smooth'
-  coffee_shop: 'acoustic chill indie'
-  morning: 'morning feel good positive'
-
-# Arc type configurations for playlist sequencing
+  workout: workout energy high bpm
+  study: focus instrumental concentration
+  sleep: sleep ambient calm
+  party: party dance hits upbeat
+  road_trip: road trip classics driving
+  dinner: dinner jazz smooth
+  coffee_shop: acoustic chill indie
+  morning: morning feel good positive
 arc_types:
   balanced:
-    description: "Consistent energy throughout - good for background listening"
+    description: Consistent energy throughout - good for background listening
   build:
-    description: "Start low, build to high energy - workout warmup"
+    description: Start low, build to high energy - workout warmup
+  early_build:
+    description: Start low, build to high by midpoint, maintain - festival warmup
   journey:
-    description: "Mid -> Peak -> Wind down - album-like experience"
+    description: Mid -> Peak -> Wind down - album-like experience
   energize:
-    description: "Start strong, maintain high energy - party/workout"
+    description: Start strong, maintain high energy - party/workout
   wind_down:
-    description: "Start high, gradually decrease - evening relaxation"
+    description: Start high, gradually decrease - evening relaxation
