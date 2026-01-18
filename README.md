@@ -11,6 +11,8 @@ AI-powered Spotify playlist creator using the Spotify Web API.
 | `rhythm_and_vines_2025.py` | Rhythm & Vines NYE 2025/2026 - High energy festival bangers |
 | `rhythm_and_vines_2025_chill.py` | Rhythm & Vines NYE 2025/2026 - Warmup mix (chill to energizing) |
 | `faithless_synthony_funky.py` | Faithless Era - Funky electronic music from the 90s/2000s |
+| `faithless_synthony_funky_v2.py` | Faithless Era v2 - With duplicate filtering and smart mixing |
+| `DUPLICATE-FILTERING-GUIDE.md` | Guide to duplicate detection and artist mixing algorithms |
 | `upload_image.py` | Utility - upload custom playlist cover images |
 | `generate_image.py` | Utility - generate AI playlist cover images |
 | `requirements.txt` | Python dependencies |
@@ -35,6 +37,7 @@ python3 example_synthony_playlist.py          # Synthony orchestra lineup
 python3 rhythm_and_vines_2025.py              # R&V high energy bangers
 python3 rhythm_and_vines_2025_chill.py        # R&V warmup mix (chill→energizing)
 python3 faithless_synthony_funky.py           # Faithless era funky electronic
+python3 faithless_synthony_funky_v2.py        # Faithless v2 (with duplicate filtering)
 ```
 
 ## Setup
@@ -121,6 +124,12 @@ See `example_synthony_playlist.py` for classical orchestra lineup example.
 - Genres: Big beat, funky house, trip hop, French touch
 - Artists: Faithless, Basement Jaxx, Fatboy Slim, Groove Armada, The Chemical Brothers, Daft Punk, Jamiroquai, Moby, Underworld, Zero 7, and more
 - Perfect for Synthony vibes, pre-festival warmup, or nostalgic electronic grooves
+
+**Version 2** (`faithless_synthony_funky_v2.py`) adds:
+- **Duplicate filtering**: Removes different versions of same song (radio edits, remixes, remasters)
+- **Smart sequencing**: Artists mixed throughout playlist instead of grouped together
+- **Best version selection**: Prefers original, full versions over edits
+- See `DUPLICATE-FILTERING-GUIDE.md` for algorithm details
 
 ## Agent Capabilities
 
