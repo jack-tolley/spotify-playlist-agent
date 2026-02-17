@@ -296,6 +296,7 @@ agent.sequence_playlist(tracks, features_map, arc_type='journey')
 |------|-------------|----------|
 | `balanced` | Consistent energy | Background listening |
 | `build` | Low -> High energy | Workout warmup |
+| `early_build` | Low -> High by midpoint, maintain | Festival warmup |
 | `journey` | Mid -> Peak -> Wind down | Album-like experience |
 | `energize` | Start strong, maintain | Party/workout |
 | `wind_down` | High -> Low | Evening relaxation |

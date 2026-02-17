@@ -905,6 +905,7 @@ class SpotifyPlaylistAgent:
         Arc types:
             - 'balanced': Smooth energy throughout
             - 'build': Start low, peak in middle, maintain
+            - 'early_build': Start low, build to high by midpoint, maintain high
             - 'journey': Start mid, build to peak, wind down
             - 'energize': Start strong, maintain high energy
             - 'wind_down': Start high, gradually decrease
@@ -929,6 +930,20 @@ class SpotifyPlaylistAgent:
         # Define target energy curve based on arc type
         if arc_type == 'build':
             target_curve = [0.3 + (0.7 * i / n) for i in range(n)]
+        elif arc_type == 'early_build':
+            # 0-50%: Build 0.3 -> 0.8
+            # 50-100%: Maintain 0.8 -> 0.9
+            target_curve = []
+            mid_point = int(n / 2)
+            for i in range(n):
+                if i < mid_point:
+                    # Ramp up
+                    progress = i / mid_point if mid_point > 0 else 0
+                    target_curve.append(0.3 + (0.5 * progress))
+                else:
+                    # Maintain high
+                    progress = (i - mid_point) / (n - mid_point) if (n - mid_point) > 0 else 0
+                    target_curve.append(0.8 + (0.1 * progress))
         elif arc_type == 'journey':
             # Bell curve: start mid, peak at 60%, wind down
             target_curve = []
